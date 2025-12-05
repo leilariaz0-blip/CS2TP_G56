@@ -1,20 +1,46 @@
 <?php
-session_start();
-$data = json_decode(file_get_contents("php://input"), true);
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
-$id = $data["productId"];
-$change = $data["change"];
+header('Content-Type: application/json');
+if (isset($_SERVER['HTTP_ORIGIN'])) {
+    header('Access-Control-Allow-Origin: ' . $_SERVER['HTTP_ORIGIN']);
+    header('Access-Control-Allow-Credentials: true');
+}
+header('Access-Control-Allow-Methods: POST, OPTIONS');
+header('Access-Control-Allow-Headers: Content-Type');
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
-if (!isset($_SESSION["cart"][$id])) {
-    echo json_encode(["error" => "Item not in cart"]);
+$data = json_decode(file_get_contents('php://input'), true);
+
+if (!isset($data['index']) || !isset($data['quantity'])) {
+    http_response_code(400);
+    echo json_encode(['error' => 'Index and quantity required']);
     exit;
 }
 
-$_SESSION["cart"][$id]["quantity"] += $change;
+$index = intval($data['index']);
+$quantity = intval($data['quantity']);
 
-if ($_SESSION["cart"][$id]["quantity"] <= 0) {
-    unset($_SESSION["cart"][$id]);
+if ($quantity < 1) {
+    http_response_code(400);
+    echo json_encode(['error' => 'Quantity must be at least 1']);
+    exit;
 }
 
-echo json_encode(["success" => true]);
+if (!isset($_SESSION['cart']) || !is_array($_SESSION['cart']) || !isset($_SESSION['cart'][$index])) {
+    http_response_code(400);
+    echo json_encode(['error' => 'Item not found in cart']);
+    exit;
+}
+
+$_SESSION['cart'][$index]['quantity'] = $quantity;
+
+echo json_encode([
+    'success' => true,
+    'message' => 'Quantity updated',
+    'newSubtotal' => $_SESSION['cart'][$index]['quantity'] * $_SESSION['cart'][$index]['price']
+]);
 ?>

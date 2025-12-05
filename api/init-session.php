@@ -1,29 +1,26 @@
 <?php
+// Start session FIRST before any headers
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
 header('Content-Type: application/json');
+// Allow credentials with CORS
 if (isset($_SERVER['HTTP_ORIGIN'])) {
     header('Access-Control-Allow-Origin: ' . $_SERVER['HTTP_ORIGIN']);
     header('Access-Control-Allow-Credentials: true');
 }
-header('Access-Control-Allow-Methods: POST, OPTIONS');
+header('Access-Control-Allow-Methods: GET');
 header('Access-Control-Allow-Headers: Content-Type');
 
-$data = json_decode(file_get_contents('php://input'), true);
-$index = intval($data['index'] ?? -1);
-
-if ($index < 0 || !isset($_SESSION['cart'][$index])) {
-    echo json_encode(['error' => 'Invalid item']);
-    exit;
+// Initialize cart if not exists
+if (!isset($_SESSION['cart'])) {
+    $_SESSION['cart'] = [];
 }
-
-// Remove item from cart
-array_splice($_SESSION['cart'], $index, 1);
 
 echo json_encode([
     'success' => true,
-    'message' => 'Item removed from cart'
+    'sessionId' => session_id(),
+    'cartCount' => array_sum(array_map(function($item) { return $item['quantity']; }, $_SESSION['cart'] ?? []))
 ]);
 ?>

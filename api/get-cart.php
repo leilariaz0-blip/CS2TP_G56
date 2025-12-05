@@ -1,44 +1,45 @@
 <?php
-require_once 'config.php';
-
-$userId = $_SESSION['user_id'] ?? null;
-$sessionId = session_id();
-
-if ($userId) {
-    $stmt = $conn->prepare("
-        SELECT c.id as cart_id, c.quantity, p.id, p.name, p.price, p.image, p.quantity as stock
-        FROM cart c
-        JOIN products p ON c.product_id = p.id
-        WHERE c.user_id = ?
-    ");
-    $stmt->bind_param("i", $userId);
-} else {
-    $stmt = $conn->prepare("
-        SELECT c.id as cart_id, c.quantity, p.id, p.name, p.price, p.image, p.quantity as stock
-        FROM cart c
-        JOIN products p ON c.product_id = p.id
-        WHERE c.session_id = ?
-    ");
-    $stmt->bind_param("s", $sessionId);
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
 }
 
-$stmt->execute();
-$result = $stmt->get_result();
+header('Content-Type: application/json');
+if (isset($_SERVER['HTTP_ORIGIN'])) {
+    header('Access-Control-Allow-Origin: ' . $_SERVER['HTTP_ORIGIN']);
+    header('Access-Control-Allow-Credentials: true');
+}
+header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
+header('Access-Control-Allow-Headers: Content-Type');
+
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
 $cartItems = [];
 $total = 0;
 
-while($row = $result->fetch_assoc()) {
-    $subtotal = $row['price'] * $row['quantity'];
-    $total += $subtotal;
-    $row['subtotal'] = $subtotal;
-    $cartItems[] = $row;
+if (isset($_SESSION['cart']) && is_array($_SESSION['cart'])) {
+    foreach ($_SESSION['cart'] as $item) {
+        $subtotal = floatval($item['price']) * intval($item['quantity']);
+        $total += $subtotal;
+        
+        $cartItems[] = [
+            'name' => $item['name'],
+            'quantity' => intval($item['quantity']),
+            'price' => floatval($item['price']),
+            'subtotal' => $subtotal
+        ];
+    }
 }
 
 echo json_encode([
     'items' => $cartItems,
     'total' => $total,
-    'count' => count($cartItems)
+    'count' => count($cartItems),
+    'sessionId' => session_id(),
+    'debug' => [
+        'cartExists' => isset($_SESSION['cart']),
+        'cartIsArray' => is_array($_SESSION['cart'] ?? null),
+        'cartCount' => count($_SESSION['cart'] ?? [])
+    ]
 ]);
-$conn->close();
 ?>
