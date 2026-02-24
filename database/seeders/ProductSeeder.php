@@ -20,7 +20,7 @@ class ProductSeeder extends Seeder
                 'price' => 2999.99,
                 'category' => 'Rings',
                 'material' => '18k White Gold',
-                'image_url' => 'C:\\xampp\\htdocs\\jewelry-store\\assets\\images\\gold-bangle.jpg',
+                'image_url' => 'images/diamond-ring.jpg',
                 'stock_quantity' => 15,
             ],
             [
@@ -40,7 +40,7 @@ class ProductSeeder extends Seeder
                 'price' => 189.99,
                 'category' => 'Earrings',
                 'material' => '14k Gold',
-                'image_url' => 'images/gold-hoops.jpg',
+                'image_url' => 'images/gold-hoop.jpg',
                 'stock_quantity' => 40,
             ],
             [
@@ -50,7 +50,7 @@ class ProductSeeder extends Seeder
                 'price' => 899.99,
                 'category' => 'Necklaces',
                 'material' => '14k White Gold',
-                'image_url' => 'images/sapphire-pendant.jpg',
+                'image_url' => 'images/saphire-ring.jpg',
                 'stock_quantity' => 12,
             ],
             [
@@ -60,7 +60,7 @@ class ProductSeeder extends Seeder
                 'price' => 3499.99,
                 'category' => 'Bracelets',
                 'material' => 'Platinum',
-                'image_url' => 'images/tennis-bracelet.jpg',
+                'image_url' => 'images/leather-bracelet.jpg',
                 'stock_quantity' => 8,
             ],
             [
@@ -70,7 +70,7 @@ class ProductSeeder extends Seeder
                 'price' => 749.99,
                 'category' => 'Earrings',
                 'material' => '14k Yellow Gold',
-                'image_url' => 'images/emerald-studs.jpg',
+                'image_url' => 'images/diamond-earring.jpg',
                 'stock_quantity' => 18,
             ],
             [
@@ -80,7 +80,7 @@ class ProductSeeder extends Seeder
                 'price' => 1899.99,
                 'category' => 'Rings',
                 'material' => '18k Gold',
-                'image_url' => 'images/ruby-ring.jpg',
+                'image_url' => 'images/saphire-ring.jpg',
                 'stock_quantity' => 10,
             ],
             [
@@ -100,7 +100,7 @@ class ProductSeeder extends Seeder
                 'price' => 1299.99,
                 'category' => 'Watches',
                 'material' => 'Rose Gold',
-                'image_url' => 'images/rose-gold-watch.jpg',
+                'image_url' => 'images/rose-gold.jpg',
                 'stock_quantity' => 20,
             ],
             [
@@ -110,7 +110,7 @@ class ProductSeeder extends Seeder
                 'price' => 599.99,
                 'category' => 'Rings',
                 'material' => '14k White Gold',
-                'image_url' => 'images/aquamarine-ring.jpg',
+                'image_url' => 'images/vintage-ring.jpg',
                 'stock_quantity' => 14,
             ],
             [
@@ -120,7 +120,7 @@ class ProductSeeder extends Seeder
                 'price' => 449.99,
                 'category' => 'Necklaces',
                 'material' => '14k Gold',
-                'image_url' => 'images/gold-chain.jpg',
+                'image_url' => 'images/gold-necklace.jpg',
                 'stock_quantity' => 35,
             ],
             [
@@ -130,7 +130,7 @@ class ProductSeeder extends Seeder
                 'price' => 1499.99,
                 'category' => 'Earrings',
                 'material' => '14k White Gold',
-                'image_url' => 'images/diamond-studs.jpg',
+                'image_url' => 'images/silver-stud.jpg',
                 'stock_quantity' => 22,
             ],
         ];

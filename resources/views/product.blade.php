@@ -8,6 +8,7 @@
 </head>
 <body>
 
+
     <style>
   /* ========ZAk styling ======== */
 body {
@@ -390,6 +391,8 @@ h3 {
         padding: 30px 20px;
     }
    </style>
+}
+<!-- Zak NAVbar -->
 <header class="navbar">
     <div class="logo">Seraphine Atelier</div>
     <nav>
@@ -398,7 +401,7 @@ h3 {
             <li><a href="product-list.html">Shop</a></li>
             <li><a href="product-list.html">Categories</a></li>
             <li><a href="about.html">About</a></li>
-            <li><a href="">Contact</a></li>
+            <li><a href="#">Contact</a></li>
         </ul>
     </nav>
 </header>
@@ -406,10 +409,10 @@ h3 {
 <!-- ZAK HERO -->
 <section class="hero">
     <div class="container hero-content">
-        <h1 class="hero-title">Discover Timeless Elegance</h1>
+        <h1 class="hero-title">{{ $product->name }}</h1>
         <p class="hero-subtitle">Luxury handcrafted jewellery for every occasion.</p>
         <div class="hero-buttons">
-            <a href="/products" class="btn-primary">Shop Now</a>
+            <a href="product-list.html" class="btn-primary">Shop Now</a>
             <a href="product-list.html" class="btn-outline">Explore Collections</a>
         </div>
     </div>

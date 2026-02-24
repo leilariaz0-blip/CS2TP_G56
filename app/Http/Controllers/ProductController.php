@@ -14,6 +14,7 @@ class ProductController extends Controller
         $products = Product::all();
         return view('products', ['products' => $products]);
     }
+    
 
     /**
      * Display a specific product.
