@@ -1,12 +1,167 @@
 <!DOCTYPE html>
 <html lang="en">
+
+   <style>
+        /* ========ZAk styling ======== */
+        body {
+            margin: 0;
+            font-family: "Inter", sans-serif;
+            background: #ffffff;
+            color: #222222;
+            line-height: 1.7;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: "Playfair Display", serif;
+            margin: 0;
+        }
+
+        .section-title {
+            font-size: 2.4rem;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1rem;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            color: #555;
+        }
+
+        /* ======== Dashboard Boxes ======== */
+        .dashboard-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .dashboard-box {
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            border: 1px solid #eee;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .dashboard-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+
+        .dashboard-box h2 {
+            font-size: 1.8rem;
+            color: #b89b5e;
+            margin-bottom: 15px;
+        }
+
+        .dashboard-box p {
+            color: #555;
+            font-size: 1rem;
+            margin-bottom: 25px;
+        }
+
+        .dashboard-box a {
+            background: #b89b5e;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background 0.3s;
+            display: inline-block;
+        }
+
+        .dashboard-box a:hover {
+            background: #a58954;
+        }
+
+        /* ======== zak Navbar  ======== */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 22px 60px;
+            border-bottom: 1px solid #eee;
+            position: sticky;
+            top: 0;
+            background: #ffffff;
+            z-index: 1000;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links li {
+            display: inline-block;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            font-size: 0.95rem;
+            padding: 6px 10px;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #b89b5e;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 18px 25px;
+            }
+
+            .dashboard-container {
+                padding: 40px 15px;
+            }
+
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 1.9rem;
+            }
+        }
+    </style>
 <head>
     <meta charset="UTF-8">
+<<<<<<< Updated upstream
     <title>Contact Us &ndash; Skyrose Atelier</title>
     @include('partials.head')
+=======
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Seraphine Atelier</title>
+    @vite(['resources/js/app.js'])
+>>>>>>> Stashed changes
 </head>
 <body>
 <div class="page-wrapper">
+<<<<<<< Updated upstream
     <div class="PageContent">
         @include('partials.nav')
 
@@ -69,6 +224,86 @@
     </div>
 
     @include('partials.footer')
+=======
+  <header class="navbar">
+    <div class="logo">Seraphine Atelier</div>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/products">Shop</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="PageContent">
+<!-- main content section -->
+    <main class="contact-section">
+      <h1>Contact Us</h1>
+
+<!-- contact form for user to send message -->
+      <form action="{{ route('contact.submit') }}" method="POST" id="contactForm" class="contact-form">
+        @csrf
+        <!-- name input -->
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" required value="{{ old('name') }}">
+          @error('name')
+            <span class="error-message">{{ $message }}</span>
+          @enderror
+        </div>
+        <!-- email input -->
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required value="{{ old('email') }}">
+          @error('email')
+            <span class="error-message">{{ $message }}</span>
+          @enderror
+        </div>
+        <!-- message box -->
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" required>{{ old('message') }}</textarea>
+          @error('message')
+            <span class="error-message">{{ $message }}</span>
+          @enderror
+        </div>
+        <!-- submit button -->
+        <button type="submit" class="form-submit">Send Message</button>
+      </form>
+        <!-- feedback message after sending -->
+      <p id="response"></p>
+    </main>
+
+    <!-- Featured Products Section -->
+    @if($products && $products->count() > 0)
+    <section class="featured-products">
+        <h2 class="section-title">Featured Products</h2>
+        <div class="product-grid">
+            @foreach($products as $product)
+            <a href="{{ route('products.show', $product->id) }}" class="product-card">
+                <img src="{{ $product->image_url }}" alt="{{ $product->name }}">
+                <h3 class="product-card h3">{{ $product->name }}</h3>
+                <p class="product-price">£{{ number_format($product->price, 2) }}</p>
+            </a>
+            @endforeach
+        </div>
+    </section>
+    @endif
+
+  </div>
+<!-- social media icons -->
+  <footer id="site-footer" class="footer">
+    <div class="FooterIconsContainer">
+      <img src="{{ asset('images/FacebookIcon.png') }}" class="FooterIcons" alt="facebook">
+      <img src="{{ asset('images/InstagramIcon.png') }}" class="FooterIcons" alt="instagram">
+      <img src="{{ asset('images/YoutubeIcon.png') }}" class="FooterIcons" alt="youtube">
+    </div>
+    <!-- copyright -->
+    <p class="ContactTitle">© 2025 Luxury Jewelry Store</p>
+  </footer>
+>>>>>>> Stashed changes
 </div>
 
 <script>

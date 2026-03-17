@@ -3,25 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link rel="stylesheet" href="css/index.css">
+    <title>Login — Skyrose Atelier</title>
+    <link rel="stylesheet" href="{{ asset('css/index.css') }}">
 </head>
 <body>
-    <!-- top navigation bar -->
     <div class="page-wrapper">
         <div class="PageContent">
             <header class="TopNav">
+                <a class="logo-link" href="/" aria-label="Skyrose Atelier home"><img class="header-logo" src="{{ asset('images/logo Skyrose.jpg') }}" alt="Skyrose Atelier logo"></a>
                 <a href="{{ url('/') }}">Home</a>
                 <a href="{{ url('/about') }}">About</a>
                 <a href="{{ route('products.index') }}">Products</a>
                 <a href="{{ url('/contact') }}">Contact</a>
-                 <!-- login/cart icons handled by JS -->
                 <div class="IconNav">
                     <a href="/wishlist" aria-label="Wishlist" class="NavWishlist"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></a>
                     <div id="auth-buttons"></div>
                 </div>
             </header>
- <!-- login form area -->
             <div class="AuthPage">
                 <div class="AuthCard">
                      <!-- login title -->
@@ -36,22 +34,33 @@
             <span style="color: red; font-size: 12px;">{{ $message }}</span>
           @enderror
 
-<!-- password input -->
-          <label for="password">Password</label>
-          <input id="password" name="password" type="password" required>
-          @error('password')
-            <span style="color: red; font-size: 12px;">{{ $message }}</span>
-          @enderror
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input id="password" name="password" type="password" required>
+                            @error('password')
+                                <span class="error-message">{{ $message }}</span>
+                            @enderror
+                        </div>
 
-<!-- submit button -->
-          <button type="submit" class="AuthButton">Login</button>
- <!-- link to registration page -->
-          <p class="AuthHelp">Don't have an account? <a href="{{ route('register') }}">Register</a></p>
-        </form>
-        <!-- error message box -->
-        <div id="error-msg" class="AuthError" aria-live="polite"></div>
-      </div>
+                        <button type="submit" class="AuthButton">Login</button>
+                        <p class="AuthHelp">Don't have an account? <a href="{{ route('register') }}">Register</a></p>
+                    </form>
+                    <div id="error-msg" class="AuthError" aria-live="polite"></div>
+                </div>
+            </div>
+        </div>
+
+        <footer id="site-footer" class="footer">
+            <div class="FooterIconsContainer">
+                <img src="{{ asset('images/FacebookIcon.png') }}" class="FooterIcons" alt="facebook">
+                <img src="{{ asset('images/InstagramIcon.png') }}" class="FooterIcons" alt="instagram">
+                <img src="{{ asset('images/YoutubeIcon.png') }}" class="FooterIcons" alt="youtube">
+            </div>
+            <p class="ContactTitle">© 2025 Luxury Jewelry Store</p>
+        </footer>
     </div>
+</body>
+</html>
 
     <!-- Featured Products Section -->
     @if($products && $products->count() > 0)
@@ -115,9 +124,9 @@
         <div id="site-footer">
             <footer class="footer">
                 <div class="FooterIconsContainer">
-                    <img src="assets/images/FacebookIcon.png" class="FooterIcons" alt="facebook">
-                    <img src="assets/images/InstagramIcon.png" class="FooterIcons" alt="instagram">
-                    <img src="assets/images/YoutubeIcon.png" class="FooterIcons" alt="youtube">
+                    <img src="{{ asset('images/FacebookIcon.png') }}" class="FooterIcons" alt="facebook">
+                    <img src="{{ asset('images/InstagramIcon.png') }}" class="FooterIcons" alt="instagram">
+                    <img src="{{ asset('images/YoutubeIcon.png') }}" class="FooterIcons" alt="youtube">
                 </div>
                 <p class="ContactTitle">© 2025 Luxury Jewelry Store</p>
             </footer>

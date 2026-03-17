@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
-    <link rel="stylesheet" href="css/index.css">
+    <title>Register — Skyrose Atelier</title>
+    <link rel="stylesheet" href="{{ asset('css/index.css') }}">
 </head>
 <body>
     <div class="page-wrapper">
         <div class="PageContent">
-            <!-- top navigation bar -->
             <header class="TopNav">
+                <a class="logo-link" href="/" aria-label="Skyrose Atelier home"><img class="header-logo" src="{{ asset('images/logo Skyrose.jpg') }}" alt="Skyrose Atelier logo"></a>
                 <a href="{{ url('/') }}">Home</a>
                 <a href="{{ url('/about') }}">About</a>
                 <a href="{{ route('products.index') }}">Products</a>
@@ -20,48 +20,59 @@
                     <div id="auth-buttons"></div>
                 </div>
             </header>
-<!-- registration layout wrapper -->
             <div class="AuthPage">
                 <div class="AuthCard">
-                      <!-- page title -->
-        <h1 class="AuthTitle">Register</h1>
-        <!-- registration form -->
-        <form action="{{ route('register.post') }}" method="POST" class="AuthForm" id="register-form">
-            @csrf
-             <!-- name field -->
-          <label for="name">Full Name</label>
-          <input id="name" name="name" type="text" value="{{ old('name') }}" required>
-          @error('name')
-            <span style="color: red; font-size: 12px;">{{ $message }}</span>
-          @enderror
+                    <h1 class="AuthTitle">Register</h1>
+                    <form action="{{ route('register.post') }}" method="POST" class="AuthForm" id="register-form">
+                        @csrf
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input id="name" name="name" type="text" value="{{ old('name') }}" required>
+                            @error('name')
+                                <span class="error-message">{{ $message }}</span>
+                            @enderror
+                        </div>
 
-          <!-- email field -->
-          <label for="email">Email</label>
-          <input id="email" name="email" type="email" value="{{ old('email') }}" required>
-          @error('email')
-            <span style="color: red; font-size: 12px;">{{ $message }}</span>
-          @enderror
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input id="email" name="email" type="email" value="{{ old('email') }}" required>
+                            @error('email')
+                                <span class="error-message">{{ $message }}</span>
+                            @enderror
+                        </div>
 
-          <!-- password field -->
-          <label for="password">Password</label>
-          <input id="password" name="password" type="password" required>
-          @error('password')
-            <span style="color: red; font-size: 12px;">{{ $message }}</span>
-          @enderror
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input id="password" name="password" type="password" required>
+                            @error('password')
+                                <span class="error-message">{{ $message }}</span>
+                            @enderror
+                        </div>
 
-          <!-- password confirmation field -->
-          <label for="password_confirmation">Confirm Password</label>
-          <input id="password_confirmation" name="password_confirmation" type="password" required>
+                        <div class="form-group">
+                            <label for="password_confirmation">Confirm Password</label>
+                            <input id="password_confirmation" name="password_confirmation" type="password" required>
+                        </div>
 
-          <!-- submit button -->
-          <button type="submit" class="AuthButton">Register</button>
+                        <button type="submit" class="AuthButton">Register</button>
+                        <p class="AuthHelp">Already have an account? <a href="{{ route('login') }}">Login</a></p>
+                    </form>
+                </div>
+            </div>
+        </div>
 
-          <!-- link to login page -->
-          <p class="AuthHelp">Already have an account? <a href="{{ route('login') }}">Login</a></p>
-        </form>
+        <footer id="site-footer" class="footer">
+            <div class="FooterIconsContainer">
+                <img src="{{ asset('images/FacebookIcon.png') }}" class="FooterIcons" alt="facebook">
+                <img src="{{ asset('images/InstagramIcon.png') }}" class="FooterIcons" alt="instagram">
+                <img src="{{ asset('images/YoutubeIcon.png') }}" class="FooterIcons" alt="youtube">
+            </div>
+            <p class="ContactTitle">© 2025 Luxury Jewelry Store</p>
+        </footer>
+    </div>
+</body>
+</html>
 
-        <!-- area to show validation / server error messages -->
-        <div id="error-msg" class="AuthError" aria-live="polite"></div>
       </div>
     </div>
 
@@ -131,9 +142,9 @@
         <div id="site-footer">
             <footer class="footer">
                 <div class="FooterIconsContainer">
-                    <img src="assets/images/FacebookIcon.png" class="FooterIcons" alt="facebook">
-                    <img src="assets/images/InstagramIcon.png" class="FooterIcons" alt="instagram">
-                    <img src="assets/images/YoutubeIcon.png" class="FooterIcons" alt="youtube">
+                    <img src="{{ asset('images/FacebookIcon.png') }}" class="FooterIcons" alt="facebook">
+                    <img src="{{ asset('images/InstagramIcon.png') }}" class="FooterIcons" alt="instagram">
+                    <img src="{{ asset('images/YoutubeIcon.png') }}" class="FooterIcons" alt="youtube">
                 </div>
                 <p class="ContactTitle">© 2025 Luxury Jewelry Store</p>
             </footer>
@@ -154,9 +165,9 @@
             <footer class="footer">
                 <!-- social icons -->
                 <div class="FooterIconsContainer">
-                    <img src="assets/images/FacebookIcon.png" class="FooterIcons" alt="facebook">
-                    <img src="assets/images/InstagramIcon.png" class="FooterIcons" alt="instagram">
-                    <img src="assets/images/YoutubeIcon.png" class="FooterIcons" alt="youtube">
+                    <img src="{{ asset('images/FacebookIcon.png') }}" class="FooterIcons" alt="facebook">
+                    <img src="{{ asset('images/InstagramIcon.png') }}" class="FooterIcons" alt="instagram">
+                    <img src="{{ asset('images/YoutubeIcon.png') }}" class="FooterIcons" alt="youtube">
                 </div>
                 <!-- copyright -->
                 <p class="ContactTitle">© 2025 Luxury Jewelry Store</p>
