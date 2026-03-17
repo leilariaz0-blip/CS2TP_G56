@@ -150,6 +150,62 @@ body { display: flex; flex-direction: column; min-height: 100vh; }
     transition: background-color 0.2s ease;
 }
 
+/* Expanding nav search bar */
+.NavSearchWrap{
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+}
+
+.NavSearchBtn{
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 7px;
+    border-radius: 2px;
+    transition: background-color 0.2s ease;
+}
+
+.NavSearchBtn:hover{
+    background-color: #111;
+}
+
+.NavSearchBtn:hover img{
+    filter: invert(1);
+}
+
+.NavSearchBtn img{
+    max-width: 28px;
+    height: 28px;
+    object-fit: contain;
+    display: block;
+    transition: filter 0.2s ease;
+}
+
+.NavSearchInput{
+    width: 0;
+    opacity: 0;
+    overflow: hidden;
+    padding: 0;
+    border: none;
+    border-bottom: 2px solid #111;
+    outline: none;
+    font-size: 14px;
+    font-family: inherit;
+    background: transparent;
+    color: #111;
+    transition: width 0.3s ease, opacity 0.3s ease, padding 0.3s ease;
+}
+
+.NavSearchWrap.open .NavSearchInput{
+    width: 180px;
+    opacity: 1;
+    padding: 4px 8px;
+}
+
 .NavSearch:hover,
 .NavWishlist:hover{
     background-color: #111;

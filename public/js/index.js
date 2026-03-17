@@ -52,8 +52,33 @@
     function escapeHtml(s){ return String(s).replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
   }
 
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', function(){ initSession(); initAuth(); });
-  else { initSession(); initAuth(); }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', function(){ initSession(); initAuth(); initNavSearch(); });
+  else { initSession(); initAuth(); initNavSearch(); }
+
+  // --- Expanding nav search ---
+  function initNavSearch(){
+    document.querySelectorAll('.NavSearchWrap').forEach(function(wrap){
+      const btn = wrap.querySelector('.NavSearchBtn');
+      const input = wrap.querySelector('.NavSearchInput');
+      if (!btn || !input) return;
+      btn.addEventListener('click', function(){
+        wrap.classList.toggle('open');
+        if (wrap.classList.contains('open')) input.focus();
+      });
+      input.addEventListener('keydown', function(e){
+        if (e.key === 'Enter' && input.value.trim()) {
+          window.location.href = '/products?q=' + encodeURIComponent(input.value.trim());
+        }
+        if (e.key === 'Escape') {
+          wrap.classList.remove('open');
+          btn.focus();
+        }
+      });
+      document.addEventListener('click', function(e){
+        if (!wrap.contains(e.target)) wrap.classList.remove('open');
+      });
+    });
+  }
 
   // fallback global logout
   if (!window.logout){
