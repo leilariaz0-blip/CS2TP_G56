@@ -340,16 +340,14 @@
                     '<div class="WishlistCardPrice">' + safePrice + '</div>' +
 
                     '<div class="WishlistCardActions">' +
+/* Add to cart button */
+'<button class="WishlistAddToCartBtn" onclick="addToCartFromWishlist(' +
+escapeHtml(JSON.stringify(item.name)) + ',' +
+escapeHtml(JSON.stringify(item.price)) + ')">Add to Cart</button>' +
 
-                        /* Add to cart button */
-                        '<button class="WishlistAddToCartBtn" onclick="addToCartFromWishlist(' +
-                        JSON.stringify(item.name) + ',' +
-                        JSON.stringify(item.price) + ')">Add to Cart</button>' +
-
-                        /* Remove button */
-                        '<button class="WishlistRemoveBtn" onclick="removeFromWishlistPage(' +
-                        JSON.stringify(item.name) + ')">&#9829;</button>' +
-
+/* Remove button */
+'<button class="WishlistRemoveBtn" onclick="removeFromWishlistPage(' +
+escapeHtml(JSON.stringify(item.name)) + ')" title="Remove from wishlist">&#9829;</button>' +
                     '</div>' +
                 '</div>' +
             '</div>';
