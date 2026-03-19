@@ -6,7 +6,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Our Products</title>
         <link rel="stylesheet" href="{{ asset('css/index.css') }}">
-        <script src="{{ asset('js/index.js') }}" defer></script>
         <style>
             /* Product Detail View Responsive Styles */
             #productDetailView .detail-grid {
@@ -592,18 +591,7 @@
 
     </div>
 
- <!-- footer section -->
-    <div id="site-footer">
-    <footer class="footer">
-        <div class="FooterIconsContainer">
-            <img src="{{ asset('images/FacebookIcon.png') }}" class="FooterIcons" alt="facebook">
-            <img src="{{ asset('images/InstagramIcon.png') }}" class="FooterIcons" alt="instagram">
-            <img src="{{ asset('images/YoutubeIcon.png') }}" class="FooterIcons" alt="youtube">
-        </div>
-        <p class="ContactTitle">© 2025 Luxury Jewelry Store</p>
-    </footer>
-</div>
-<script src="{{ asset('js/index.js') }}" defer></script>
+    @include('partials.footer')
 
 <script>
 // Check if we're viewing a specific product
@@ -758,4 +746,3 @@ if (document.getElementById('searchInput')) {
 
 </body>
 </html>
-
