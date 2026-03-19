@@ -78,7 +78,9 @@
         <div class="SearchCard">
             <p class="SearchEyebrow">Search the collection</p>
             <div class="SearchBar">
-                <span class="SearchIcon" aria-hidden="true">🔍</span>
+                <span class="SearchIcon" aria-hidden="true">
+                    <img src="{{ asset('images/SearchIcon.png') }}" alt="" aria-hidden="true">
+                </span>
                 <input type="text" id="searchInput" placeholder="Search products by name or category..." />
             </div>
         </div>
@@ -756,5 +758,4 @@ if (document.getElementById('searchInput')) {
 
 </body>
 </html>
-
 
