@@ -2,16 +2,22 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Necklaces &ndash; Skyrose Atelier</title>
   <link rel="stylesheet" href="{{ asset('css/index.css') }}">
+  <link rel="icon" type="image/jpeg" href="{{ asset('images/logo%20Skyrose.jpg') }}">
 </head>
 <body>
   <div class="page-wrapper">
     <div class="PageContent">
       @include('partials.nav')
-      <p class="TitleDescription">Statement and everyday necklaces.</p>
+
+      @include('partials.category-dropdown', ['active' => 'necklaces'])
+
+      <section class="TitleSection">
+        <h1 class="MainTitle">Necklaces</h1>
+        <p class="TitleDescription">Statement and everyday necklaces.</p>
       </section>
 
  <!-- necklace products grid -->
@@ -111,4 +117,3 @@
   <script src="{{ asset('js/wishlist.js') }}" defer></script>
 </body>
 </html>
-

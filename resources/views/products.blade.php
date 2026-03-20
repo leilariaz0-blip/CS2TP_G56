@@ -6,6 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Our Products</title>
         <link rel="stylesheet" href="{{ asset('css/index.css') }}">
+        <link rel="icon" type="image/jpeg" href="{{ asset('images/logo%20Skyrose.jpg') }}">
         <style>
             /* Product Detail View Responsive Styles */
             #productDetailView .detail-grid {

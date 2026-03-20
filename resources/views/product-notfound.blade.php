@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Details</title>
     <link rel="stylesheet" href="{{ asset('css/index.css') }}">
+    <link rel="icon" type="image/jpeg" href="{{ asset('images/logo%20Skyrose.jpg') }}">
     <script src="{{ asset('js/index.js') }}" defer></script>
     <style>
         .ProductDetail {
@@ -752,6 +753,5 @@
     </script>
 </body>
 </html>
-
 
 
