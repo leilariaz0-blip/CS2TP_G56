@@ -199,7 +199,12 @@
                 headers: { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': CSRF },
                 body: JSON.stringify({ shipping_address: address, payment_method: payment, notes })
             })
-            .then(r => r.json())
+            .then(r => {
+                if (!r.ok) {
+                    throw new Error(`HTTP ${r.status}: ${r.statusText}`);
+                }
+                return r.json();
+            })
             .then(data => {
                 if (data.success) {
                     showToast('Order placed! Redirecting…');
@@ -210,8 +215,9 @@
                     btn.textContent = 'Place Order';
                 }
             })
-            .catch(() => {
-                showToast('A network error occurred. Please try again.');
+            .catch(err => {
+                console.error('Checkout error:', err);
+                showToast('Network error: ' + err.message);
                 btn.disabled = false;
                 btn.textContent = 'Place Order';
             });

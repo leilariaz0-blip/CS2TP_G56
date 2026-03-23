@@ -17,6 +17,7 @@ class Order extends Model
         'user_id',
         'total_amount',
         'status',
+        'order_number',
         'payment_method',
         'shipping_address',
         'notes',
@@ -43,6 +44,8 @@ class Order extends Model
      * Get the order items for the order.
      */
     public function items(): HasMany
+
+    public function orderItems(): HasMany
     {
         return $this->hasMany(OrderItem::class);
     }
