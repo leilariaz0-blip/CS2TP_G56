@@ -44,6 +44,9 @@ class Order extends Model
      * Get the order items for the order.
      */
     public function items(): HasMany
+    {
+        return $this->hasMany(OrderItem::class);
+    }
 
     public function orderItems(): HasMany
     {
