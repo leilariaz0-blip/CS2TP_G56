@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Our Products</title>
         <link rel="stylesheet" href="{{ asset('css/index.css') }}">
-        <script src="{{ asset('js/index.js') }}" defer></script>
+        <script src="{{ asset('js/index.js') }}?v=2" defer></script>
         <style>
             /* Product Detail View Responsive Styles */
             #productDetailView .detail-grid {
@@ -162,7 +162,7 @@
     </div>
 
     @include('partials.footer')
-<script src="{{ asset('js/index.js') }}" defer></script>
+<script src="{{ asset('js/index.js') }}?v=2" defer></script>
 
 <script>
 // Check if we're viewing a specific product
