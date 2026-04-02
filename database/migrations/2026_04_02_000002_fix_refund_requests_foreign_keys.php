@@ -1,38 +1,43 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 return new class extends Migration {
     public function up(): void
     {
-        Schema::table('refund_requests', function (Blueprint $table) {
-            // Drop existing foreign keys before altering column types
-            $table->dropForeign(['order_id']);
-            $table->dropForeign(['user_id']);
+        // Use raw SQL to avoid doctrine/dbal dependency for column type change.
+        // Only needed on MySQL (SQLite uses dynamic typing).
+        if (DB::getDriverName() !== 'mysql') {
+            return;
+        }
 
-            // Change from unsignedInteger to unsignedBigInteger to match orders/users id() columns
-            $table->unsignedBigInteger('order_id')->change();
-            $table->unsignedBigInteger('user_id')->change();
+        // Drop FK constraints before modifying column types
+        try { DB::statement('ALTER TABLE refund_requests DROP FOREIGN KEY refund_requests_order_id_foreign'); } catch (\Exception $e) {}
+        try { DB::statement('ALTER TABLE refund_requests DROP FOREIGN KEY refund_requests_user_id_foreign'); } catch (\Exception $e) {}
 
-            // Re-add foreign keys
-            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-        });
+        // Change INT to BIGINT to match orders.id / users.id (which use BIGINT UNSIGNED via id())
+        DB::statement('ALTER TABLE refund_requests MODIFY order_id BIGINT UNSIGNED NOT NULL');
+        DB::statement('ALTER TABLE refund_requests MODIFY user_id BIGINT UNSIGNED NOT NULL');
+
+        // Re-add foreign keys
+        DB::statement('ALTER TABLE refund_requests ADD CONSTRAINT refund_requests_order_id_foreign FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE');
+        DB::statement('ALTER TABLE refund_requests ADD CONSTRAINT refund_requests_user_id_foreign FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE');
     }
 
     public function down(): void
     {
-        Schema::table('refund_requests', function (Blueprint $table) {
-            $table->dropForeign(['order_id']);
-            $table->dropForeign(['user_id']);
+        if (DB::getDriverName() !== 'mysql') {
+            return;
+        }
 
-            $table->unsignedInteger('order_id')->change();
-            $table->unsignedInteger('user_id')->change();
+        try { DB::statement('ALTER TABLE refund_requests DROP FOREIGN KEY refund_requests_order_id_foreign'); } catch (\Exception $e) {}
+        try { DB::statement('ALTER TABLE refund_requests DROP FOREIGN KEY refund_requests_user_id_foreign'); } catch (\Exception $e) {}
 
-            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-        });
+        DB::statement('ALTER TABLE refund_requests MODIFY order_id INT UNSIGNED NOT NULL');
+        DB::statement('ALTER TABLE refund_requests MODIFY user_id INT UNSIGNED NOT NULL');
+
+        DB::statement('ALTER TABLE refund_requests ADD CONSTRAINT refund_requests_order_id_foreign FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE');
+        DB::statement('ALTER TABLE refund_requests ADD CONSTRAINT refund_requests_user_id_foreign FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE');
     }
 };
