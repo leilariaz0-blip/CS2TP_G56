@@ -35,11 +35,15 @@
                 <a href="{{ route('admin.dashboard') }}" aria-label="Admin Dashboard" title="Admin Dashboard">
                     <img src="{{ asset('images/inventory.png') }}" alt="Admin Dashboard" style="width:32px;height:32px;border-radius:50%;background:#fff3cd;padding:2px;vertical-align:middle;">
                 </a>
+                {{-- ADMIN: profile --}}
+                <a href="{{ route('profile.edit') }}" aria-label="My Profile" title="My Profile">
+                    <img src="{{ asset('images/ProfileIcon.png') }}" alt="My Profile">
+                </a>
                 {{-- ADMIN: logout --}}
                 <form method="POST" action="{{ route('logout') }}" style="display:inline;">
                     @csrf
-                    <button type="submit" aria-label="Logout" title="Logout" style="background:none;border:none;cursor:pointer;padding:0;display:flex;align-items:center;">
-                        <img src="{{ asset('images/ProfileIcon.png') }}" alt="Logout" style="opacity:0.7;">
+                    <button type="submit" aria-label="Logout" title="Logout" style="background:none;border:none;cursor:pointer;padding:0;display:flex;align-items:center;font-size:13px;color:#111;font-family:inherit;">
+                        Logout
                     </button>
                 </form>
             @else
