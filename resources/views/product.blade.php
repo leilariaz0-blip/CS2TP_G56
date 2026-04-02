@@ -203,7 +203,7 @@
 
     <div class="Toast" id="toast"></div>
 
-    <script src="{{ asset('js/wishlist.js') }}"></script>
+    <script src="{{ asset('js/wishlist.js') }}?v=2"></script>
     <script>
         const CSRF = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
         const productName = @json($product->name);

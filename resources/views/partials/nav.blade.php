@@ -22,24 +22,21 @@
             <input type="text" class="NavSearchInput" placeholder="Search products..." aria-label="Search products">
         </div>
 
+        {{-- Wishlist icon: visible for all users (guests use localStorage, auth users use API) --}}
+        <a href="/wishlist" aria-label="Wishlist" title="Wishlist" class="NavWishlist">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+            </svg>
+        </a>
+
         @auth
             @if(auth()->user()->is_admin)
-                {{-- ADMIN: dashboard icon + wishlist --}}
+                {{-- ADMIN: dashboard icon --}}
                 <a href="{{ route('admin.dashboard') }}" aria-label="Admin Dashboard" title="Admin Dashboard">
                     <img src="{{ asset('images/inventory.png') }}" alt="Admin Dashboard" style="width:32px;height:32px;border-radius:50%;background:#fff3cd;padding:2px;vertical-align:middle;">
                 </a>
-                <a href="/wishlist" aria-label="Wishlist" title="Wishlist" class="NavWishlist">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-                    </svg>
-                </a>
             @else
-                {{-- REGULAR USER: wishlist + my orders + profile --}}
-                <a href="/wishlist" aria-label="Wishlist" title="Wishlist" class="NavWishlist">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-                    </svg>
-                </a>
+                {{-- REGULAR USER: my orders + profile --}}
                 <a href="{{ route('orders.my') }}" aria-label="My Orders" title="My Orders">
                     <img src="{{ asset('images/orderconfirmed.png') }}" alt="My Orders" style="width:24px;height:24px;vertical-align:middle;">
                 </a>

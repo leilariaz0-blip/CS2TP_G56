@@ -223,7 +223,7 @@
 <div class="WishlistToast" id="wishlist-page-toast"></div>
 
 <!-- External wishlist JS file (Zak - functionality split) -->
-<script src="{{ asset('js/wishlist.js') }}"></script>
+<script src="{{ asset('js/wishlist.js') }}?v=2"></script>
 
 <script>
 (function () {
