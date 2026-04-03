@@ -75,6 +75,25 @@
 
 <!-- Products Grid (uses CSS in css/index.css) -->
 <main class="ProductsGrid" id="productsGrid" aria-label="Product list">
+<script>
+(function(){
+    function fixGrid(){
+        var g = document.getElementById('productsGrid');
+        if(!g) return;
+        if(window.innerWidth <= 600){
+            g.style.gridTemplateColumns = 'repeat(2, 1fr)';
+            g.style.gap = '12px';
+            g.style.padding = '12px';
+        } else {
+            g.style.gridTemplateColumns = '';
+            g.style.gap = '';
+            g.style.padding = '';
+        }
+    }
+    fixGrid();
+    window.addEventListener('resize', fixGrid);
+})();
+</script>
     @foreach($products as $product)
         <a class="ProductCard" href="/products/{{ $product->id }}" data-name="{{ $product->name }}" data-category="{{ $product->category }}" data-id="{{ $product->id }}">
             <div class="ProductImageWrap">
