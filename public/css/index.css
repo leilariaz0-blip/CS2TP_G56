@@ -1325,7 +1325,7 @@ body { display: flex; flex-direction: column; min-height: 100vh; }
 
 @media (max-width: 600px){
     .ProductImage{ height:160px }
-    .ProductsGrid{ padding: 16px }
+    .ProductsGrid{ padding: 16px; grid-template-columns: repeat(2, 1fr); gap: 12px; }
     .AuthCard{ padding: 18px }
     .AuthTitle{ font-size:22px }
 }
