@@ -6,16 +6,21 @@
     <a class="logo-link" href="{{ $homeUrl }}" aria-label="Skyrose Atelier home">
         <img class="header-logo" src="{{ asset('images/logo Skyrose.jpg') }}" alt="Skyrose Atelier logo" style="height:48px;width:auto;">
     </a>
-    <a href="{{ $homeUrl }}">Home</a>
-    <a href="/about">About</a>
-    <a href="/products">Products</a>
-    <a href="/contact">Contact</a>
-    @auth
-        @if(auth()->user()->is_admin)
-            <a href="{{ route('admin.dashboard') }}">Dashboard</a>
-        @endif
-    @endauth
-    <div class="IconNav" style="display: flex; justify-content: flex-end; align-items: center; gap: 16px; width: 600px;">
+    <div class="nav-links" id="nav-links">
+        <a href="{{ $homeUrl }}">Home</a>
+        <a href="/about">About</a>
+        <a href="/products">Products</a>
+        <a href="/contact">Contact</a>
+        @auth
+            @if(auth()->user()->is_admin)
+                <a href="{{ route('admin.dashboard') }}">Dashboard</a>
+            @endif
+        @endauth
+    </div>
+    <button class="nav-hamburger" id="nav-hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+    </button>
+    <div class="IconNav" style="display: flex; justify-content: flex-end; align-items: center; gap: 16px;">
 
         {{-- Search (always visible) --}}
         <div class="NavSearchWrap">
@@ -74,5 +79,23 @@
         </a>
     </div>
 </div>
+<script>
+(function(){
+    var btn = document.getElementById('nav-hamburger');
+    var links = document.getElementById('nav-links');
+    if(btn && links){
+        btn.addEventListener('click', function(){
+            var open = links.classList.toggle('open');
+            btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        });
+        document.addEventListener('click', function(e){
+            if(!btn.contains(e.target) && !links.contains(e.target)){
+                links.classList.remove('open');
+                btn.setAttribute('aria-expanded', 'false');
+            }
+        });
+    }
+})();
+</script>
 
 
