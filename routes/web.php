@@ -39,7 +39,10 @@ Route::get('/category/rings',     fn() => view('rings'))->name('category.rings')
 Route::get('/category/earrings',  fn() => view('earrings'))->name('category.earrings');
 Route::get('/category/bracelets', fn() => view('bracelets'))->name('category.bracelets');
 Route::get('/category/necklaces', fn() => view('necklaces'))->name('category.necklaces');
-Route::get('/category/watches',   fn() => view('watches'))->name('category.watches');
+Route::get('/category/watches',   function () {
+    $products = \App\Models\Product::whereIn('category', ['Watch', 'Watches'])->get();
+    return view('watches', ['products' => $products]);
+})->name('category.watches');
 
 /*
 |-----------------------------------------------------------------------
