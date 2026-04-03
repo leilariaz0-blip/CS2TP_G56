@@ -47,13 +47,19 @@
                     </button>
                 </form>
             @else
-                {{-- REGULAR USER: my orders + profile --}}
+                {{-- REGULAR USER: my orders + profile + logout --}}
                 <a href="{{ route('orders.my') }}" aria-label="My Orders" title="My Orders">
                     <img src="{{ asset('images/orderconfirmed.png') }}" alt="My Orders" style="width:24px;height:24px;vertical-align:middle;">
                 </a>
                 <a href="{{ route('profile.edit') }}" aria-label="My Profile" title="My Profile">
                     <img src="{{ asset('images/ProfileIcon.png') }}" alt="My Profile">
                 </a>
+                <form method="POST" action="{{ route('logout') }}" style="display:inline;">
+                    @csrf
+                    <button type="submit" aria-label="Logout" title="Logout" style="background:none;border:none;cursor:pointer;padding:0;display:flex;align-items:center;font-size:13px;color:#111;font-family:inherit;">
+                        Logout
+                    </button>
+                </form>
             @endif
         @else
             {{-- GUEST: login icon --}}
