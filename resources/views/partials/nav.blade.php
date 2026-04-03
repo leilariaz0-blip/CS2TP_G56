@@ -65,7 +65,19 @@
     </div>
 
     {{-- Mobile-only "Navigation" button (JS shows on mobile) --}}
-    <button class="NavToggle" id="nav-toggle" aria-label="Open navigation" style="display:none;">Navigation</button>
+    <div id="mobile-actions" style="display:none;align-items:center;gap:8px;margin-left:auto;">
+        @auth
+            <a href="{{ route('profile.edit') }}" style="display:flex;align-items:center;padding:6px;">
+                <img src="{{ asset('images/ProfileIcon.png') }}" alt="Profile" style="width:26px;height:26px;object-fit:contain;">
+            </a>
+        @else
+            <a href="/login" style="display:inline-flex;align-items:center;padding:7px 14px;background:#111;color:#fff;border-radius:4px;font-size:14px;font-weight:600;text-decoration:none;">Login</a>
+        @endauth
+        <a href="/cart" style="display:flex;align-items:center;padding:6px;">
+            <img src="{{ asset('images/CartIcon.png') }}" alt="Cart" style="width:26px;height:26px;object-fit:contain;">
+        </a>
+        <button class="NavToggle" id="nav-toggle" aria-label="Open navigation" style="background:transparent;border:1px solid #111;border-radius:4px;padding:7px 14px;font-size:14px;font-weight:600;cursor:pointer;color:#111;font-family:inherit;">Navigation</button>
+    </div>
 </div>
 
 <div id="nav-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:1050;"></div>
@@ -147,13 +159,13 @@
 
     var desktopLinks = document.getElementById('desktop-nav-links');
     var desktopIcons = document.getElementById('desktop-icon-nav');
+    var mobileActions = document.getElementById('mobile-actions');
 
-    // Show/hide elements based on screen width
     function checkMobile(){
         var isMobile = window.innerWidth <= 768;
-        if(toggle) toggle.style.display = isMobile ? 'block' : 'none';
         if(desktopLinks) desktopLinks.style.display = isMobile ? 'none' : 'flex';
         if(desktopIcons) desktopIcons.style.display = isMobile ? 'none' : 'flex';
+        if(mobileActions) mobileActions.style.display = isMobile ? 'flex' : 'none';
     }
     checkMobile();
     window.addEventListener('resize', checkMobile);
